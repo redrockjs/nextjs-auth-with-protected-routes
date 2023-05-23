@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {setCookie, deleteCookie} from 'cookies-next';
 
 type AccessTokenType = null | string
 type RefreshTokenType = null | string
@@ -8,7 +9,7 @@ type InitialStateType = {
   refreshToken: RefreshTokenType
 };
 
-type Tokens = { accessToken: string, refreshToken: string }
+export type Tokens = { accessToken: string, refreshToken: string }
 
 const initialState: InitialStateType = {
   accessToken:
@@ -31,12 +32,17 @@ export const authSlice = createSlice({
       localStorage.setItem("refreshToken", refreshToken);
       state.accessToken = accessToken;
       state.refreshToken = refreshToken;
+      setCookie('accessToken', accessToken, {maxAge: 60 * 60 * 24})
+      setCookie('refreshToken', refreshToken, {maxAge: 60 * 60 * 24 * 30})
+
     },
     delCredentials: (state, _) => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       state.accessToken = "";
       state.refreshToken = "";
+      deleteCookie('accessToken')
+      deleteCookie('refreshToken')
     }
   },
 });

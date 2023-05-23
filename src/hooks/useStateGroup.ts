@@ -27,7 +27,7 @@ export function useStateGroup<T extends {}>(group: T): [T, Setters<T>] {
 
     const setters = {};
     for (let key of Object.keys(group)) {
-        (<any>setters)[key] = (value: any) => {
+        (setters as any)[key] = (value: any) => {
             setState(state => Object.assign({...state}, {[key]: value}));
         }
     }

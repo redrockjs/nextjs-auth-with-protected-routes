@@ -6,18 +6,9 @@ import {
 } from "@reduxjs/toolkit/query/react";
 import {HYDRATE} from "next-redux-wrapper";
 
-import {delCredentials, setCredentials} from "./authSlice";
+import {delCredentials, setCredentials, Tokens} from "./authSlice";
 import {RootState} from "./store";
 import {BaseQueryFn} from "@reduxjs/toolkit/src/query";
-
-export type RequestErrorType = {
-  data: {
-    error: string
-    message: string
-    statusCode: number
-  },
-  status: number
-}
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_API_URL,
@@ -41,7 +32,17 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   let result = await baseQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 401) {
-    api.dispatch(delCredentials({}))
+    const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
+
+    if (refreshResult.data) {
+      // Store the new token
+      api.dispatch(setCredentials({ ...refreshResult?.data as Tokens }));
+      // Retry the original query with new access token
+      result = await baseQuery(args, api, extraOptions);
+    } else {
+      api.dispatch(delCredentials({}));
+      api.dispatch(apiSlice.util.resetApiState()); // полный сброс кэша RTK при выходе из системы
+    }
   }
 
   return result;
