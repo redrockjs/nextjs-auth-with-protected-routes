@@ -25,6 +25,7 @@
     "postcss": "8.4.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
     "slate": "^0.100.0",
     "slate-history": "^0.100.0",
     "slate-react": "^0.101.0",
