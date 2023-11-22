@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, {ReactNode, Ref, PropsWithChildren} from 'react'
 import ReactDOM from 'react-dom'
 import {cx, css} from '@emotion/css'

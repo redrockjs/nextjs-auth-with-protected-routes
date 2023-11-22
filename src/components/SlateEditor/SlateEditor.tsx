@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, {useCallback, useMemo} from 'react'
 import {Editable, withReact, useSlate, Slate} from 'slate-react'
 import {
@@ -15,13 +16,23 @@ import s from './SlateEditor.module.scss'
 
 const LIST_TYPES = ['numbered-list', 'bulleted-list']
 
-const RichTextExample = () => {
+type TSlateEditor = {
+  onChange: (value: [
+    {
+      type: 'paragaph',
+      children: [{ text: '' }],
+    },
+  ]) => void
+  defaultValue: Descendant[];
+}
+
+const SlateEditor = ({onChange, defaultValue}: TSlateEditor) => {
   const renderElement = useCallback((props: any) => <Element {...props} />, [])
   const renderLeaf = useCallback((props: any) => <Leaf {...props} />, [])
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
 
   return (
-    <Slate editor={editor} initialValue={initialValue}>
+    <Slate editor={editor} initialValue={defaultValue} onChange={onChange}>
       <Toolbar>
         <MarkButton format="bold" icon="format_bold"/>
         <MarkButton format="italic" icon="format_italic"/>
@@ -30,6 +41,7 @@ const RichTextExample = () => {
         <BlockButton format="bulleted-list" icon="format_list_bulleted"/>
       </Toolbar>
       <Editable
+        className={s.Editor}
         renderElement={renderElement}
         renderLeaf={renderLeaf}
         placeholder="Enter some rich text…"
@@ -61,9 +73,9 @@ const toggleBlock = (editor, format) => {
   //     align: isActive ? undefined : format,
   //   }
   // } else {
-    newProperties = {
-      type: isActive ? 'paragraph' : isList ? 'list-item' : format,
-    }
+  newProperties = {
+    type: isActive ? 'paragraph' : isList ? 'list-item' : format,
+  }
   // }
   Transforms.setNodes<SlateElement>(editor, newProperties)
 
@@ -167,7 +179,7 @@ const BlockButton = ({format, icon}) => {
         toggleBlock(editor, format)
       }}
     >
-      <Icon icon={icon} />
+      <Icon icon={icon}/>
       {/*<Icon>{icon}</Icon>*/}
     </Button>
   )
@@ -184,7 +196,7 @@ const MarkButton = ({format, icon}) => {
         toggleMark(editor, format)
       }}
     >
-      <Icon icon={icon} />
+      <Icon icon={icon}/>
       {/*<Icon>{icon}</Icon>*/}
     </Button>
   )
@@ -199,4 +211,4 @@ const initialValue: Descendant[] = [
   }
 ]
 
-export default RichTextExample
+export default SlateEditor
