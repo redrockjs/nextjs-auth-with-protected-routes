@@ -38,6 +38,9 @@ export function SlateEditorView() {
 
       <SlateEditor onChange={setValue} defaultValue={value}/>
 
+      <p style={{margin: '20px 0'}}>
+        dangerouslySetInnerHTML example
+      </p>
       <div style={{width: '500px', height: '200px', background: '#DDD', color: '#000'}}
            dangerouslySetInnerHTML={{
              __html: output
