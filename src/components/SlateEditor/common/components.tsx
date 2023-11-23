@@ -1,8 +1,7 @@
-// @ts-nocheck
-import React, {ReactNode, Ref, PropsWithChildren} from 'react'
+import React, {ReactNode, Ref, PropsWithChildren, forwardRef, LegacyRef} from 'react'
 import ReactDOM from 'react-dom'
-import {cx, css} from '@emotion/css'
 import s from './components.module.scss'
+import clsx from "clsx";
 
 interface BaseProps {
   className: string
@@ -12,7 +11,8 @@ interface BaseProps {
 
 type OrNull<T> = T | null
 
-export const Button = React.forwardRef(
+// eslint-disable-next-line react/display-name
+export const Button = forwardRef(
   (
     {
       className,
@@ -29,7 +29,7 @@ export const Button = React.forwardRef(
   ) => (
     <span
       {...props}
-      ref={ref}
+      ref={ref as Ref<HTMLSpanElement>}
       style={{
         cursor: 'pointer',
         color:
@@ -45,12 +45,13 @@ export const Button = React.forwardRef(
   )
 )
 
-export const Menu = React.forwardRef(
+// eslint-disable-next-line react/display-name
+export const Menu = forwardRef(
   (
     {className, ...props}: PropsWithChildren<BaseProps>,
     ref: Ref<OrNull<HTMLDivElement>>
   ) => (
-    <div {...props} data-test-id="menu" ref={ref} className={cx(className, s.Menu)}/>
+    <div {...props} data-test-id="menu" ref={ref as Ref<HTMLDivElement>} className={clsx(className, s.Menu)}/>
   )
 )
 
@@ -59,12 +60,12 @@ export const Portal = ({children}: { children?: ReactNode }) => {
     ? ReactDOM.createPortal(children, document.body)
     : null
 }
-
-export const Toolbar = React.forwardRef(
+// eslint-disable-next-line react/display-name
+export const Toolbar = forwardRef(
   (
     {className, ...props}: PropsWithChildren<BaseProps>,
     ref: Ref<OrNull<HTMLDivElement>>
   ) => (
-    <Menu {...props} ref={ref} className={cx(className, s.Toolbar)}/>
+    <Menu {...props} ref={ref as Ref<HTMLDivElement>} className={clsx(className, s.Toolbar)}/>
   )
 )

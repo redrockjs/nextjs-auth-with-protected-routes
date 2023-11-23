@@ -24,7 +24,7 @@ export function SlateEditorView() {
     window.localStorage.setItem('editor', JSON.stringify(value))
   }, [value, setValue]);
 
-  let output = serialize({
+  let output = serializeSlate({
     children: [...value]
   })
   console.log(value)
@@ -60,7 +60,7 @@ const initialValue: Descendant[] = [
   }
 ]
 
-export const serialize = node =>{
+export const serializeSlate = node =>{
   if(Text.isText(node)){
     return getMarked(node, escapeHtml(node.text));
   }
