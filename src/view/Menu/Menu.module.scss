@@ -1,0 +1,69 @@
+.Overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 0;
+  width: 0;
+  z-index: 0;
+
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+
+  &_show {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+}
+
+.Sidebar {
+  height: calc(100vh);
+  background-color: #ffffff;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+  position: fixed;
+  top: 0;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  width: 360px;
+  left: -100%;
+  overflow-x: hidden;
+
+  padding: 20px 10px;
+
+  &_show {
+    left: 0;
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &__Title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 130%;
+    color: #233038;
+    height: 26px;
+    padding: 0;
+    text-align: center;
+  }
+}
+
+.List{
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 2s ease-in-out;
+}
+
+.ListItem {
+  cursor: pointer;
+}

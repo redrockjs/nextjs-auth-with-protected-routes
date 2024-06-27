@@ -29,6 +29,11 @@ export default function Navbar() {
             Login
           </Link>
         </li>
+        <li>
+          <Link href={'/menu'}>
+            Menu
+          </Link>
+        </li>
       </ul>
     </nav>
   )
