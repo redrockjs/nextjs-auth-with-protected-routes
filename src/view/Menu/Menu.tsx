@@ -99,7 +99,6 @@ export default function Menu({}: MenuProps) {
             <ul
               className={s.List}
               style={{
-                opacity: (block === '1' ? 1 : 0),
                 transform: `translateX(${
                   block === '1'
                     ? level > 1
@@ -143,7 +142,6 @@ export default function Menu({}: MenuProps) {
             <ul
               className={s.List}
               style={{
-                opacity: (block === '2' ? 1 : 0),
                 transform: `translateX(${
                   block === '2'
                     ? level > 1
@@ -163,7 +161,6 @@ export default function Menu({}: MenuProps) {
             <ul
               className={s.List}
               style={{
-                opacity: (block === '3' ? 1 : 0),
                 transform: `translateX(${
                   block === '3'
                     ? level > 1
@@ -183,7 +180,6 @@ export default function Menu({}: MenuProps) {
             <ul
               className={s.List}
               style={{
-                opacity: (block === '11' ? 1 : 0),
                 transform: `translateX(${
                   block === '11'
                     ? level > 2
