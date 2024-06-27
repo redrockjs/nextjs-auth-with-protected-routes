@@ -39,7 +39,7 @@
   &_show {
     left: 0;
     opacity: 1;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.25s ease-in-out;
   }
 
   &__Title {
@@ -54,16 +54,20 @@
   }
 }
 
-.List{
+.List {
   position: absolute;
   top: 80px;
   left: 20px;
+  width: calc(100% - 40px);
   display: flex;
   flex-direction: column;
   gap: 16px;
-  transition: transform 1s ease-in-out;
+  transition:transform 0.25s ease-in-out;
 }
 
 .ListItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
 }

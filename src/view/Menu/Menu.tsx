@@ -70,7 +70,8 @@ export default function Menu({}: MenuProps) {
                   setBlock('1')
                 }}
               >
-                Menu1
+                <p>Menu1</p>
+                <NextIcon/>
               </li>
               <li
                 className={s.ListItem}
@@ -79,7 +80,8 @@ export default function Menu({}: MenuProps) {
                   setBlock('2')
                 }}
               >
-                Menu2
+                <p>Menu2</p>
+                <NextIcon/>
               </li>
               <li
                 className={s.ListItem}
@@ -88,7 +90,8 @@ export default function Menu({}: MenuProps) {
                   setBlock('3')
                 }}
               >
-                Menu3
+                <p>Menu3</p>
+                <NextIcon/>
               </li>
               <li className={s.ListItem}>Item1</li>
               <li className={s.ListItem}>Item2</li>
@@ -99,13 +102,13 @@ export default function Menu({}: MenuProps) {
             <ul
               className={s.List}
               style={{
+                transition: block[0] === '1' ? 'transform 0.25s ease-in-out' : 'transform 0s',
                 transform: `translateX(${
                   block === '1'
                     ? level > 1
                       ? -360
                       : level < 1
-                        ? 360
-                        : 0
+                        ? 360 : 0
                     : level > 1 ? -360 : 360
                 }px)`
               }}>
@@ -116,7 +119,8 @@ export default function Menu({}: MenuProps) {
                   setBlock('11')
                 }}
               >
-                SubMenu11
+                <p>SubMenu11</p>
+                <NextIcon/>
               </li>
               <li
                 className={s.ListItem}
@@ -125,7 +129,8 @@ export default function Menu({}: MenuProps) {
                   setBlock('12')
                 }}
               >
-                SubMenu12
+                <p>SubMenu12</p>
+                <NextIcon/>
               </li>
               <li
                 className={s.ListItem}
@@ -134,7 +139,8 @@ export default function Menu({}: MenuProps) {
                   setBlock('13')
                 }}
               >
-                SubMenu13
+                <p>SubMenu13</p>
+                <NextIcon/>
               </li>
             </ul>
 
@@ -142,13 +148,13 @@ export default function Menu({}: MenuProps) {
             <ul
               className={s.List}
               style={{
+                transition: block[0] === '2' ? 'transform 0.25s ease-in-out' : 'transform 0s',
                 transform: `translateX(${
                   block === '2'
                     ? level > 1
                       ? -360
                       : level < 1
-                        ? 360
-                        : 0
+                        ? 360 : 0
                     : level > 1 ? -360 : 360
                 }px)`
               }}>
@@ -161,13 +167,13 @@ export default function Menu({}: MenuProps) {
             <ul
               className={s.List}
               style={{
+                transition: block[0] === '3' ? 'transform 0.25s ease-in-out' : 'transform 0s',
                 transform: `translateX(${
                   block === '3'
                     ? level > 1
                       ? -360
                       : level < 1
-                        ? 360
-                        : 0
+                        ? 360 : 0
                     : level > 1 ? -360 : 360
                 }px)`
               }}>
@@ -195,27 +201,43 @@ export default function Menu({}: MenuProps) {
               <li className={s.ListItem}>SubMenu113</li>
             </ul>
 
-            {/*/!*sub 12*!/*/}
-            {/*<ul*/}
-            {/*  className={s.List}*/}
-            {/*  style={{*/}
-            {/*    transform: `translateX(${block === '12' ? ((level * -360) + 360) : 360}px)`*/}
-            {/*  }}>*/}
-            {/*  <li className={s.ListItem}>SubMenu121</li>*/}
-            {/*  <li className={s.ListItem}>SubMenu122</li>*/}
-            {/*  <li className={s.ListItem}>SubMenu123</li>*/}
-            {/*</ul>*/}
+            {/*sub 12*/}
+            <ul
+              className={s.List}
+              style={{
+                transform: `translateX(${
+                  block === '12'
+                    ? level > 2
+                      ? -360
+                      : level < 2
+                        ? 360
+                        : 0
+                    : level > 2 ? -360 : 360
+                }px)`
+              }}>
+              <li className={s.ListItem}>SubMenu121</li>
+              <li className={s.ListItem}>SubMenu122</li>
+              <li className={s.ListItem}>SubMenu123</li>
+            </ul>
 
-            {/*/!*sub 13*!/*/}
-            {/*<ul*/}
-            {/*  className={s.List}*/}
-            {/*  style={{*/}
-            {/*    transform: `translateX(${block === '13' ? ((level * -360) + 360) : 360}px)`*/}
-            {/*  }}>*/}
-            {/*  <li className={s.ListItem}>SubMenu131</li>*/}
-            {/*  <li className={s.ListItem}>SubMenu132</li>*/}
-            {/*  <li className={s.ListItem}>SubMenu133</li>*/}
-            {/*</ul>*/}
+            {/*sub 13*/}
+            <ul
+              className={s.List}
+              style={{
+                transform: `translateX(${
+                  block === '13'
+                    ? level > 2
+                      ? -360
+                      : level < 2
+                        ? 360
+                        : 0
+                    : level > 2 ? -360 : 360
+                }px)`
+              }}>
+              <li className={s.ListItem}>SubMenu131</li>
+              <li className={s.ListItem}>SubMenu132</li>
+              <li className={s.ListItem}>SubMenu133</li>
+            </ul>
 
           </nav>
         </div>
@@ -341,6 +363,13 @@ const CloseIcon = ({...props}: SVGProps<SVGSVGElement>) => (
 const BackIcon = ({...props}: SVGProps<SVGSVGElement>) => (
   <svg {...props} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M15 6L9 12L15 18" stroke="#233038" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)
+
+const NextIcon = ({...props}: SVGProps<SVGSVGElement>) => (
+  <svg {...props} width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M9 5.5L15 12.5L9 19.5" stroke="#1A1A1A" strokeOpacity="0.9" strokeWidth="1.7037" strokeLinecap="round"
+          strokeLinejoin="round"/>
   </svg>
 
 )
