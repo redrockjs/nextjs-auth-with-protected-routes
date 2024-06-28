@@ -1,9 +1,9 @@
-import s from './Menu.module.scss'
-import {ReactNode, SVGProps, useEffect, useState} from "react";
+import s from './MenuBis.module.scss'
+import React, {ReactElement, ReactNode, SVGProps, useEffect, useState} from "react";
+import {usePrevious} from "@uidotdev/usehooks";
 import clsx from "clsx";
-import {usePrevious} from '@uidotdev/usehooks';
 
-type MenuProps = {}
+type MenuBisProps = {}
 
 export type TMenuItem = {
   name: string;
@@ -11,9 +11,7 @@ export type TMenuItem = {
   children?: TMenuItem[];
 };
 
-
-export default function Menu({}: MenuProps) {
-
+export default function MenuBis({}: MenuBisProps) {
   const [show, setShow] = useState(false);
   const [level, setLevel] = useState<number>(0);
   const [block, setBlock] = useState<string>('0');
@@ -29,6 +27,7 @@ export default function Menu({}: MenuProps) {
 
   const width = 360
   let levelT = 0
+
   const tree = (items: TMenuItem[]) => {
     items.forEach(item => {
       if (item.children) {
@@ -43,6 +42,25 @@ export default function Menu({}: MenuProps) {
   };
 
   tree(menuMock)
+
+  const Tree = ({items}: { items: TMenuItem[] }) => {
+    return items.map((item, idx) => {
+      if (item.children) {
+        return (
+          <div key={idx} className={s.List}>
+            <div className={s.ListItem}>{item.name}</div>
+            <Tree items={item.children}/>
+          </div>
+        );
+      } else {
+        return (
+          <div key={idx} className={s.ListItem}>
+            {item.component}
+          </div>
+        );
+      }
+    });
+  };
 
   return (
     <>
@@ -76,191 +94,14 @@ export default function Menu({}: MenuProps) {
             )}
           </h2>
 
-          <nav>
-            <ul className={s.List} style={{transform: `translateX(${level === 0 ? 0 : -360}px)`}}>
-              <li
-                className={s.ListItem}
-                onClick={() => {
-                  setLevel(1);
-                  setBlock('1')
-                }}
-              >
-                <p>Menu1</p>
-                <NextIcon/>
-              </li>
-              <li
-                className={s.ListItem}
-                onClick={() => {
-                  setLevel(1);
-                  setBlock('2')
-                }}
-              >
-                <p>Menu2</p>
-                <NextIcon/>
-              </li>
-              <li
-                className={s.ListItem}
-                onClick={() => {
-                  setLevel(1);
-                  setBlock('3')
-                }}
-              >
-                <p>Menu3</p>
-                <NextIcon/>
-              </li>
-              <li className={s.ListItem}>Item1</li>
-              <li className={s.ListItem}>Item2</li>
-              <li className={s.ListItem}>Item3</li>
-            </ul>
-
-            {/*sub 1*/}
-            <ul
-              className={s.List}
-              style={{
-                transition: block[0] === '1' ? 'transform 0.25s ease-in-out' : 'transform 0s',
-                transform: `translateX(${
-                  block === '1'
-                    ? level > 1
-                      ? -360
-                      : level < 1
-                        ? 360 : 0
-                    : level > 1 ? -360 : 360
-                }px)`
-              }}>
-              <li
-                className={s.ListItem}
-                onClick={() => {
-                  setLevel(2);
-                  setBlock('11')
-                }}
-              >
-                <p>SubMenu11</p>
-                <NextIcon/>
-              </li>
-              <li
-                className={s.ListItem}
-                onClick={() => {
-                  setLevel(2);
-                  setBlock('12')
-                }}
-              >
-                <p>SubMenu12</p>
-                <NextIcon/>
-              </li>
-              <li
-                className={s.ListItem}
-                onClick={() => {
-                  setLevel(2);
-                  setBlock('13')
-                }}
-              >
-                <p>SubMenu13</p>
-                <NextIcon/>
-              </li>
-            </ul>
-
-            {/*sub 2*/}
-            <ul
-              className={s.List}
-              style={{
-                transition: block[0] === '2' ? 'transform 0.25s ease-in-out' : 'transform 0s',
-                transform: `translateX(${
-                  block === '2'
-                    ? level > 1
-                      ? -360
-                      : level < 1
-                        ? 360 : 0
-                    : level > 1 ? -360 : 360
-                }px)`
-              }}>
-              <li className={s.ListItem}>SubMenu21</li>
-              <li className={s.ListItem}>SubMenu22</li>
-              <li className={s.ListItem}>SubMenu23</li>
-            </ul>
-
-            {/*sub 3*/}
-            <ul
-              className={s.List}
-              style={{
-                transition: block[0] === '3' ? 'transform 0.25s ease-in-out' : 'transform 0s',
-                transform: `translateX(${
-                  block === '3'
-                    ? level > 1
-                      ? -360
-                      : level < 1
-                        ? 360 : 0
-                    : level > 1 ? -360 : 360
-                }px)`
-              }}>
-              <li className={s.ListItem}>SubMenu31</li>
-              <li className={s.ListItem}>SubMenu32</li>
-              <li className={s.ListItem}>SubMenu33</li>
-            </ul>
-
-            {/*sub 11*/}
-            <ul
-              className={s.List}
-              style={{
-                transform: `translateX(${
-                  block === '11'
-                    ? level > 2
-                      ? -360
-                      : level < 2
-                        ? 360
-                        : 0
-                    : level > 2 ? -360 : 360
-                }px)`
-              }}>
-              <li className={s.ListItem}>SubMenu111</li>
-              <li className={s.ListItem}>SubMenu112</li>
-              <li className={s.ListItem}>SubMenu113</li>
-            </ul>
-
-            {/*sub 12*/}
-            <ul
-              className={s.List}
-              style={{
-                transform: `translateX(${
-                  block === '12'
-                    ? level > 2
-                      ? -360
-                      : level < 2
-                        ? 360
-                        : 0
-                    : level > 2 ? -360 : 360
-                }px)`
-              }}>
-              <li className={s.ListItem}>SubMenu121</li>
-              <li className={s.ListItem}>SubMenu122</li>
-              <li className={s.ListItem}>SubMenu123</li>
-            </ul>
-
-            {/*sub 13*/}
-            <ul
-              className={s.List}
-              style={{
-                transform: `translateX(${
-                  block === '13'
-                    ? level > 2
-                      ? -360
-                      : level < 2
-                        ? 360
-                        : 0
-                    : level > 2 ? -360 : 360
-                }px)`
-              }}>
-              <li className={s.ListItem}>SubMenu131</li>
-              <li className={s.ListItem}>SubMenu132</li>
-              <li className={s.ListItem}>SubMenu133</li>
-            </ul>
-
-          </nav>
+          <ul className={s.List}>
+            <Tree items={menuMock} />
+          </ul>
         </div>
       </div>
     </>
   )
 }
-
 
 const menuMock: TMenuItem[] = [
   {
@@ -403,7 +244,6 @@ const CloseIcon = ({...props}: SVGProps<SVGSVGElement>) => (
   </svg>
 
 )
-
 
 const BackIcon = ({...props}: SVGProps<SVGSVGElement>) => (
   <svg {...props} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

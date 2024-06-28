@@ -34,6 +34,11 @@ export default function Navbar() {
             Menu
           </Link>
         </li>
+        <li>
+          <Link href={'/menuBis'}>
+            MenuBis
+          </Link>
+        </li>
       </ul>
     </nav>
   )
