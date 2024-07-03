@@ -1,9 +1,9 @@
-import s from './MenuBis.module.scss'
-import React, {ReactElement, ReactNode, SVGProps, useEffect, useState} from "react";
+import s from './MenuTwo.module.scss'
+import React, {ReactNode, SVGProps, useEffect, useState} from "react";
 import {usePrevious} from "@uidotdev/usehooks";
 import clsx from "clsx";
 
-type MenuBisProps = {}
+type MenuTwoProps = {}
 
 export type TMenuItem = {
   name: string;
@@ -11,10 +11,10 @@ export type TMenuItem = {
   children?: TMenuItem[];
 };
 
-export default function MenuBis({}: MenuBisProps) {
+export default function MenuTwo({}: MenuTwoProps) {
   const [show, setShow] = useState(false);
   const [level, setLevel] = useState<number>(0);
-  const [block, setBlock] = useState<string>('0');
+  const [block, setBlock] = useState<string>('1');
   const previousBlock = usePrevious(block);
 
   const handleClose = () => {
@@ -41,16 +41,16 @@ export default function MenuBis({}: MenuBisProps) {
     });
   };
 
-  tree(menuMock)
-
   const Tree = ({items}: { items: TMenuItem[] }) => {
     return items.map((item, idx) => {
       if (item.children) {
         return (
-          <div key={idx} className={s.List}>
-            <div className={s.ListItem}>{item.name}</div>
+          <>
+            <div key={idx} className={s.List}>
+              <div className={s.ListItem}>{item.name}</div>
+            </div>
             <Tree items={item.children}/>
-          </div>
+          </>
         );
       } else {
         return (
@@ -79,7 +79,7 @@ export default function MenuBis({}: MenuBisProps) {
             {level === 0 && <CloseIcon style={{cursor: 'pointer'}} onClick={handleClose}/>}
             {level > 0 && <BackIcon style={{cursor: 'pointer'}} onClick={() => {
               setLevel(level - 1);
-              setBlock(previousBlock)
+              setBlock(block.slice(0,-1))
             }}/>}
           </div>
           <h2 className={s.Sidebar__Title}>
@@ -87,16 +87,62 @@ export default function MenuBis({}: MenuBisProps) {
             {level > 0 && (
               <div onClick={() => {
                 setLevel(level - 1)
-                setBlock(previousBlock)
+                setBlock(block.slice(0,-1))
               }} style={{cursor: 'pointer'}}>
                 Подзаголовок1
               </div>
             )}
           </h2>
 
-          <ul className={s.List}>
-            <Tree items={menuMock} />
-          </ul>
+
+          <nav className={s.Nav}>
+            <div
+              className={s.MenuItem}
+              data-level={1}
+              style={{transform: `translateX(${
+                  block === '1'
+                    ? level > 0
+                      ? -360
+                      : level < 0
+                        ? 360 : 0
+                    : level > 0 ? -360 : 360
+                }px)`}}
+              onClick={() => {setLevel(prev => prev + 1); setBlock('11')}}
+            >
+              Menu 1
+            </div>
+
+            <div
+              className={s.MenuItem}
+              data-level={2}
+              style={{transform: `translateX(${
+                  block === '11'
+                    ? level > 1
+                      ? -360
+                      : level < 1
+                        ? 360 : 0
+                    : level > 1 ? -360 : 360
+                }px)`}}
+              onClick={() => {setLevel(prev => prev + 1); setBlock('111')}}
+            >
+              SubMenu 11
+            </div>
+
+            <div
+              className={s.MenuItem}
+              style={{transform: `translateX(${
+                  block === '111'
+                    ? level > 2
+                      ? -360
+                      : level < 2
+                        ? 360 : 0
+                    : level > 2 ? -360 : 360
+                }px)`}}
+            >
+              Component 111
+            </div>
+          </nav>
+
         </div>
       </div>
     </>
@@ -110,36 +156,6 @@ const menuMock: TMenuItem[] = [
       {
         name: 'Clothes and shoes',
         children: [
-          // {
-          //   name: 'Men',
-          //   children: [
-          //     {
-          //       name: 'Men Shoes 1',
-          //       component: <p>Men Shoes 1</p>
-          //     }, {
-          //       name: 'Men Shoes 2',
-          //       component: <p>Men Shoes 2</p>
-          //     }, {
-          //       name: 'Men Shoes 3',
-          //       component: <p>Men Shoes 3</p>
-          //     },
-          //   ]
-          // },
-          // {
-          //   name: 'Women',
-          //   children: [
-          //     {
-          //       name: 'Women Shoes 1',
-          //       component: <p>Men Shoes 1</p>
-          //     }, {
-          //       name: 'Women Shoes 2',
-          //       component: <p>Men Shoes 2</p>
-          //     }, {
-          //       name: 'Women Shoes 3',
-          //       component: <p>Men Shoes 3</p>
-          //     },
-          //   ]
-          // },
           {
             name: 'Shoes 1',
             component: <p>Shoes 2</p>
@@ -162,75 +178,7 @@ const menuMock: TMenuItem[] = [
           },
         ],
       },
-      {
-        name: 'Electronics and engineering',
-        children: [
-          {
-            name: 'Electronics 1',
-            component: <p>Electronics 1 </p>,
-          },
-          {
-            name: 'Electronics 2',
-            component: <p>Electronics 1 </p>,
-          },
-          {
-            name: 'Electronics 3',
-            component: <p>Electronics 1 </p>,
-          },
-          {
-            name: 'Electronics 4',
-            component: <p>Electronics 1 </p>,
-          },
-          {
-            name: 'Electronics 5',
-            component: <p>Electronics 1 </p>,
-          },
-          {
-            name: 'Electronics 6',
-            component: <p>Electronics 1 </p>,
-          },
-          {
-            name: 'Electronics 7',
-            component: <p>Electronics 1 </p>,
-          },
-        ],
-      }
     ],
-  },
-  {
-    name: 'Price',
-    children: [
-      {
-        name: 'price under 10',
-        component: <p>Under $10 </p>,
-      },
-      {
-        name: 'price 10-30',
-        component: <p>Under $10-30 </p>,
-      },
-      {
-        name: 'price 30-50',
-        component: <p>Under $30-50 </p>,
-      },
-      {
-        name: 'price 50-100',
-        component: <p>Under $50-100 </p>,
-      },
-      {
-        name: 'price over 100',
-        component: <p>Over $100 </p>,
-      },
-    ],
-  },
-  {
-    name: 'Rating',
-    component: (
-      <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
-        <p>Rating above 4.5 </p>
-        <p>Rating above 4.2 </p>
-        <p>Rating above 4.0 </p>
-      </div>
-    ),
   },
 ];
 

@@ -35,8 +35,18 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link href={'/menuBis'}>
-            MenuBis
+          <Link href={'/menu-two'}>
+            MenuTwo
+          </Link>
+        </li>
+        <li>
+          <Link href={'/menu-three'}>
+            MenuThree
+          </Link>
+        </li>
+        <li>
+          <Link href={'/menu-four'}>
+            MenuFour
           </Link>
         </li>
       </ul>

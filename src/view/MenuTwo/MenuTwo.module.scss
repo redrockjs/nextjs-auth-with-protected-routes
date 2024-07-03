@@ -91,3 +91,18 @@
   align-items: center;
   cursor: pointer;
 }
+
+
+.Nav {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.MenuItem {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  transition: transform 0.25s ease-in-out;
+  cursor: pointer;
+}

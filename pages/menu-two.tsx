@@ -1,7 +1,7 @@
 import {Default} from "@/src/layouts";
-import MenuBis from "@/src/view/MenuBis/MenuBis";
+import MenuBis from "@/src/view/MenuTwo/MenuTwo";
 
-export default function MenuPage () {
+export default function MenuBisPage () {
   return (
     <Default>
       <MenuBis />
