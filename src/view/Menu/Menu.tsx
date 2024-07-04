@@ -269,36 +269,36 @@ const menuMock: TMenuItem[] = [
       {
         name: 'Clothes and shoes',
         children: [
-          // {
-          //   name: 'Men',
-          //   children: [
-          //     {
-          //       name: 'Men Shoes 1',
-          //       component: <p>Men Shoes 1</p>
-          //     }, {
-          //       name: 'Men Shoes 2',
-          //       component: <p>Men Shoes 2</p>
-          //     }, {
-          //       name: 'Men Shoes 3',
-          //       component: <p>Men Shoes 3</p>
-          //     },
-          //   ]
-          // },
-          // {
-          //   name: 'Women',
-          //   children: [
-          //     {
-          //       name: 'Women Shoes 1',
-          //       component: <p>Men Shoes 1</p>
-          //     }, {
-          //       name: 'Women Shoes 2',
-          //       component: <p>Men Shoes 2</p>
-          //     }, {
-          //       name: 'Women Shoes 3',
-          //       component: <p>Men Shoes 3</p>
-          //     },
-          //   ]
-          // },
+          {
+            name: 'Men',
+            children: [
+              {
+                name: 'Men Shoes 1',
+                component: <p>Men Shoes 1</p>
+              }, {
+                name: 'Men Shoes 2',
+                component: <p>Men Shoes 2</p>
+              }, {
+                name: 'Men Shoes 3',
+                component: <p>Men Shoes 3</p>
+              },
+            ]
+          },
+          {
+            name: 'Women',
+            children: [
+              {
+                name: 'Women Shoes 1',
+                component: <p>Men Shoes 1</p>
+              }, {
+                name: 'Women Shoes 2',
+                component: <p>Men Shoes 2</p>
+              }, {
+                name: 'Women Shoes 3',
+                component: <p>Men Shoes 3</p>
+              },
+            ]
+          },
           {
             name: 'Shoes 1',
             component: <p>Shoes 2</p>

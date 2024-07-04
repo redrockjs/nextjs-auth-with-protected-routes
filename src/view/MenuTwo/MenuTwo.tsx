@@ -62,6 +62,8 @@ export default function MenuTwo({}: MenuTwoProps) {
     });
   };
 
+  tree()
+
   return (
     <>
       <button className={s.OpenBtn} onClick={() => setShow(!show)}>

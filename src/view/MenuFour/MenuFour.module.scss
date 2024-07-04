@@ -1,0 +1,22 @@
+.Card {
+  display: block;
+}
+
+.Title {
+  font-weight: bold;
+}
+
+
+.List {
+  & .red {
+    color: green;
+  }
+}
+
+.ListItem {
+  cursor: pointer;
+
+  & .red {
+    color: green;
+  }
+}
