@@ -46,6 +46,7 @@ export default function Menu({}: MenuProps) {
 
   return (
     <>
+      <h2 className={'py-8 font-bold text-2xl'}>Menu One</h2>
       <button className={s.OpenBtn} onClick={() => setShow(!show)}>
         Open
       </button>

@@ -49,6 +49,11 @@ export default function Navbar() {
             MenuFour
           </Link>
         </li>
+        <li>
+          <Link href={'/menu-five'}>
+            MenuFive
+          </Link>
+        </li>
       </ul>
     </nav>
   )

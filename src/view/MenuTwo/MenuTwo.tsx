@@ -29,7 +29,7 @@ export default function MenuTwo({}: MenuTwoProps) {
   let levelT = 0
 
   const tree = (items: TMenuItem[]) => {
-    items.forEach(item => {
+    items?.forEach(item => {
       if (item.children) {
         levelT++
         console.log('🍒 parent ' + item.name + ` level ${levelT}`);
