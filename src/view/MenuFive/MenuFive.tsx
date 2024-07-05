@@ -1,13 +1,57 @@
 import s from './MenuFive.module.scss'
-import {SVGProps, useState} from "react";
+import React, {SVGProps, useState} from "react";
 import clsx from "clsx";
 
 type MenuFiveProps = {}
+
+type ItemType = {
+  name: string
+  children: ItemType[]
+}
 
 export default function MenuFive({}: MenuFiveProps) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
+
+  const [showLevelOne, setShowLevelOne] = useState(false);
+  const [showLevelTwo, setShowLevelTwo] = useState(false);
+
+
+  function ListItem({item}: { item: ItemType }) {
+    let childrenNode = null;
+    if (item.children && item.children.length) {
+      childrenNode = (
+        // <ul>
+        //   {item.children.map((childItem, idx) => (
+        //     <ListItem item={childItem} key={idx}/>
+        //   ))}
+        // </ul>
+
+        <li className="icon icon-arrow-left">
+          <p>{item.name}</p>
+          <div className="mp-level">
+            <h2>{item.name}</h2>
+            <a className="mp-back" href="#">back</a>
+            <ul>
+              {item.children.map((childItem, idx) => (
+                <ListItem item={childItem} key={idx}/>
+              ))}
+            </ul>
+          </div>
+        </li>
+      );
+    }
+
+    return (
+      <>
+        <li><p>{item.name}</p></li>
+        {childrenNode && (
+          <li> {childrenNode} </li>
+        )}
+      </>
+    );
+  }
 
   return (
     <div>
@@ -16,7 +60,6 @@ export default function MenuFive({}: MenuFiveProps) {
       <button className={s.OpenBtn} onClick={() => setShow(!show)}>
         Open
       </button>
-
 
       <div className={clsx(s.Overlay, show && s.Overlay_show)}>
         <div className={clsx(s.Sidebar, show && s.Sidebar_show)}>
@@ -27,16 +70,18 @@ export default function MenuFive({}: MenuFiveProps) {
               <h2>All Categories</h2>
               <ul>
                 <li className="icon icon-arrow-left">
-                  <p>Devices</p>
-                  <div className="mp-level">
+                  <p onClick={() => setShowLevelOne(true)}>Devices</p>
+                  <div className="mp-level"
+                       style={{transform: showLevelOne ? 'translate3d(0, 0, 0)' : 'translate3d(100%, 0, 0)'}}>
                     <h2>Devices</h2>
-                    <a className="mp-back" href="#">back</a>
+                    <p className="mp-back" onClick={() => setShowLevelOne(false)}>back</p>
                     <ul>
                       <li className="icon icon-arrow-left">
-                        <p>Mobile Phones</p>
-                        <div className="mp-level">
+                        <p onClick={() => setShowLevelTwo(true)}>Mobile Phones</p>
+                        <div className="mp-level"
+                             style={{transform: showLevelTwo ? 'translate3d(0, 0, 0)' : 'translate3d(100%, 0, 0)'}}>
                           <h2>Mobile Phones</h2>
-                          <a className="mp-back" href="#">back</a>
+                          <p className="mp-back" onClick={() => setShowLevelTwo(false)}>back</p>
                           <ul>
                             <li><p>Super Smart Phone</p></li>
                             <li><p>Thin Magic Mobile</p></li>
