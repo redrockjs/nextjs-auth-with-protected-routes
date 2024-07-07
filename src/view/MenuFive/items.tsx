@@ -64,7 +64,7 @@ export const itemsMock = [
       {name: 'Grocery', children: []},
     ]
   },
-  {name: 'Collections', children: []},
+  {name: 'Collections', component: (<p>TEST</p>)},
   {name: 'Credits', children: []},
   {name: 'items', children: []},
 ]
