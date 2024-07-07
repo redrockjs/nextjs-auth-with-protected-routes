@@ -3,37 +3,37 @@ export const itemsMock = [
     name: 'Devices', children: [
       {
         name: 'Mobile phones', children: [
-          {name: 'Mobile 1', children: []},
-          {name: 'Mobile 2', children: []},
-          {name: 'Mobile 3', children: []},
-          {name: 'Mobile 4', children: []},
+          {name: 'Mobile 1', component: (<p>Mobile 1</p>)},
+          {name: 'Mobile 2', component: (<p>Mobile 2</p>)},
+          {name: 'Mobile 3', component: (<p>Mobile 3</p>)},
+          {name: 'Mobile 4', component: (<p>Mobile 4</p>)},
         ]
       },
       {
         name: 'Televisions', children: [
-          {name: 'TV 1', children: []},
-          {name: 'TV 2', children: []},
-          {name: 'TV 3', children: []},
-          {name: 'TV 4', children: []},
-          {name: 'TV 5', children: []},
+          {name: 'TV 1', component: (<p>TV 1</p>)},
+          {name: 'TV 2', component: (<p>TV 2</p>)},
+          {name: 'TV 3', component: (<p>TV 3</p>)},
+          {name: 'TV 4', component: (<p>TV 4</p>)},
+          {name: 'TV 5', component: (<p>TV 5</p>)},
         ]
       },
       {
         name: 'Cameras', children: [
-          {name: 'Cam 1', children: []},
-          {name: 'Cam 2', children: []},
-          {name: 'Cam 3', children: []},
+          {name: 'Cam 1', component: (<p>Cam 1</p>)},
+          {name: 'Cam 1', component: (<p>Cam 1</p>)},
+          {name: 'Cam 1', component: (<p>Cam 1</p>)},
         ]
       },
     ]
   },
   {
     name: 'Magazines', children: [
-      {name: 'American Times', children: []},
-      {name: 'Asian Times', children: []},
-      {name: 'Europe Times', children: []},
-      {name: 'Africa Times', children: []},
-      {name: 'Oceania Times', children: []},
+      {name: 'American Times', component: (<p>American Times</p>)},
+      {name: 'Asian Times', component: (<p>Asian Times</p>)},
+      {name: 'Europe Times', component: (<p>Europe Times</p>)},
+      {name: 'Africa Times', component: (<p>Africa Times</p>)},
+      {name: 'Oceania Times', component: (<p>Oceania Times</p>)},
     ]
   },
   {
@@ -42,29 +42,28 @@ export const itemsMock = [
         name: 'Clothes', children: [
           {
             name: 'Women\'s Clothing', children: [
-              {name: 'Tops', children: []},
-              {name: 'Dresses', children: []},
-              {name: 'Trousers', children: []},
-              {name: 'Shoes', children: []},
-              {name: 'Sale', children: []},
+              {name: 'Tops', component: (<p>Tops</p>)},
+              {name: 'Dresses', component: (<p>Dresses</p>)},
+              {name: 'Trousers', component: (<p>Trousers</p>)},
+              {name: 'Shoes', component: (<p>Shoes</p>)},
+              {name: 'Sale', component: (<p>Sale</p>)},
             ]
           },
           {
             name: 'Men\'s Clothing', children: [
-              {name: 'Shirts', children: []},
-              {name: 'Trousers', children: []},
-              {name: 'Shoes', children: []},
-              {name: 'Sale', children: []},
+              {name: 'Shirts', component: (<p>Shirts</p>)},
+              {name: 'Trousers', component: (<p>Trousers</p>)},
+              {name: 'Shoes', component: (<p>Shoes</p>)},
+              {name: 'Sale', component: (<p>Sale</p>)},
             ]
           },
         ]
       },
-      {name: 'Jewelry', children: []},
-      {name: 'Music', children: []},
-      {name: 'Grocery', children: []},
+      {name: 'Jewelry', component: (<p>Jewelry</p>)},
+      {name: 'Music', component: (<p>Music</p>)},
+      {name: 'Grocery', component: (<p>Grocery</p>)},
     ]
   },
-  {name: 'Collections', component: (<p>TEST</p>)},
-  {name: 'Credits', children: []},
-  {name: 'items', children: []},
+  {name: 'Collections', component: (<p>Collections</p>)},
+  {name: 'Credits', component: (<p>Credits</p>)},
 ]

@@ -1,13 +1,14 @@
 import s from './MenuFive.module.scss'
-import {SVGProps, useState} from "react";
+import {ReactNode, SVGProps, useState} from "react";
 import clsx from "clsx";
-import {itemsMock} from './items';
+import {itemsMock} from "@/src/view/MenuFive/items";
 
 type MenuFiveProps = {}
 
-type ItemType = {
-  name: string
-  children: ItemType[]
+type TMenuItem = {
+  name: string;
+  component?: ReactNode;
+  children?: TMenuItem[];
 }
 
 export default function MenuFive({}: MenuFiveProps) {
@@ -15,19 +16,20 @@ export default function MenuFive({}: MenuFiveProps) {
 
   const handleClose = () => setShow(false);
 
-  function ListItem({item}: { item: ItemType }) {
+  function ListItem({item}: { item: TMenuItem }) {
     let childrenNode = null;
     const [open, setOpen] = useState(false)
+
+    const handleShow = () => setOpen(true)
+    const handleHide = () => setOpen(false)
 
     if (item.children && item.children.length) {
       childrenNode = (
         <li className={s.ListItem}>
-          <p onClick={() => setOpen(true)}>{item.name}</p>
+          <p onClick={handleShow}>{item.name}</p>
           <div className={clsx(s.Level, open && s.Level_active)}>
 
-            <p className={s.BackBtn} onClick={() => setOpen(false)}>
-              {item.name}
-            </p>
+            <p className={s.BackBtn} onClick={handleHide}> {item.name} </p>
 
             <ul className={s.List}>
               {item.children.map((childItem, idx) => (
@@ -42,11 +44,7 @@ export default function MenuFive({}: MenuFiveProps) {
     return (
       <>
         {childrenNode === null
-          ? (
-            <li className={s.ListItem}>
-              <p>{item.name}</p>
-            </li>
-          )
+          ? <li className={s.ListItem}> {item.component ?? item.name} </li>
           : childrenNode
         }
       </>
@@ -63,7 +61,10 @@ export default function MenuFive({}: MenuFiveProps) {
 
       <div className={clsx(s.Overlay, show && s.Overlay_show)}>
         <div className={clsx(s.Sidebar, show && s.Sidebar_show)}>
-          <CloseIcon className={s.Sidebar__CloseIcon} onClick={handleClose}/>
+          <div className={s.Sidebar__Header}>
+            <CloseIcon className={s.Sidebar__CloseIcon} onClick={handleClose}/>
+            Filter
+          </div>
           <nav className={s.Menu}>
             <div className={s.Level}>
               <ul className={s.List}>
