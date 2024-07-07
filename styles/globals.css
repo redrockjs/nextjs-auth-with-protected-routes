@@ -550,7 +550,7 @@ body {
 }
 
 .mp-cover .mp-level.mp-level-open > ul > li > .mp-level:not(.mp-level-open) {
-  -webkit-transform: translate3d(-100%, 0, 0);
+  -webkit-transform: translate3d(100%, 0, 0);
   transform: translate3d(100%, 0, 0);
 }
 

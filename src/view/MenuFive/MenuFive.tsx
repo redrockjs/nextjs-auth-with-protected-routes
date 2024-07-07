@@ -1,6 +1,7 @@
 import s from './MenuFive.module.scss'
-import React, {SVGProps, useState} from "react";
+import {SVGProps, useState} from "react";
 import clsx from "clsx";
+import {itemsMock} from './items';
 
 type MenuFiveProps = {}
 
@@ -14,26 +15,21 @@ export default function MenuFive({}: MenuFiveProps) {
 
   const handleClose = () => setShow(false);
 
-  const [showLevelOne, setShowLevelOne] = useState(false);
-  const [showLevelTwo, setShowLevelTwo] = useState(false);
-
-
   function ListItem({item}: { item: ItemType }) {
     let childrenNode = null;
+    const [open, setOpen] = useState(false)
+
     if (item.children && item.children.length) {
       childrenNode = (
-        // <ul>
-        //   {item.children.map((childItem, idx) => (
-        //     <ListItem item={childItem} key={idx}/>
-        //   ))}
-        // </ul>
+        <li className={s.ListItem}>
+          <p onClick={() => setOpen(true)}>{item.name}</p>
+          <div className={clsx(s.Level, open && s.Level_active)}>
 
-        <li className="icon icon-arrow-left">
-          <p>{item.name}</p>
-          <div className="mp-level">
-            <h2>{item.name}</h2>
-            <a className="mp-back" href="#">back</a>
-            <ul>
+            <p className={s.BackBtn} onClick={() => setOpen(false)}>
+              {item.name}
+            </p>
+
+            <ul className={s.List}>
               {item.children.map((childItem, idx) => (
                 <ListItem item={childItem} key={idx}/>
               ))}
@@ -45,10 +41,14 @@ export default function MenuFive({}: MenuFiveProps) {
 
     return (
       <>
-        <li><p>{item.name}</p></li>
-        {childrenNode && (
-          <li> {childrenNode} </li>
-        )}
+        {childrenNode === null
+          ? (
+            <li className={s.ListItem}>
+              <p>{item.name}</p>
+            </li>
+          )
+          : childrenNode
+        }
       </>
     );
   }
@@ -64,129 +64,13 @@ export default function MenuFive({}: MenuFiveProps) {
       <div className={clsx(s.Overlay, show && s.Overlay_show)}>
         <div className={clsx(s.Sidebar, show && s.Sidebar_show)}>
           <CloseIcon className={s.Sidebar__CloseIcon} onClick={handleClose}/>
-
-          <nav id="mp-menu" className="mp-menu mp-level-open">
-            <div className="mp-level">
-              <h2>All Categories</h2>
-              <ul>
-                <li className="icon icon-arrow-left">
-                  <p onClick={() => setShowLevelOne(true)}>Devices</p>
-                  <div className="mp-level"
-                       style={{transform: showLevelOne ? 'translate3d(0, 0, 0)' : 'translate3d(100%, 0, 0)'}}>
-                    <h2>Devices</h2>
-                    <p className="mp-back" onClick={() => setShowLevelOne(false)}>back</p>
-                    <ul>
-                      <li className="icon icon-arrow-left">
-                        <p onClick={() => setShowLevelTwo(true)}>Mobile Phones</p>
-                        <div className="mp-level"
-                             style={{transform: showLevelTwo ? 'translate3d(0, 0, 0)' : 'translate3d(100%, 0, 0)'}}>
-                          <h2>Mobile Phones</h2>
-                          <p className="mp-back" onClick={() => setShowLevelTwo(false)}>back</p>
-                          <ul>
-                            <li><p>Super Smart Phone</p></li>
-                            <li><p>Thin Magic Mobile</p></li>
-                            <li><p>Performance Crusher</p></li>
-                            <li><p>Futuristic Experience</p></li>
-                          </ul>
-                        </div>
-                      </li>
-                      <li className="icon icon-arrow-left">
-                        <p>Televisions</p>
-                        <div className="mp-level">
-                          <h2>Televisions</h2>
-                          <a className="mp-back" href="#">back</a>
-                          <ul>
-                            <li><p>Flat Superscreen</p></li>
-                            <li><p>Gigantic LED</p></li>
-                            <li><p>Power Eater</p></li>
-                            <li><p>3D Experience</p></li>
-                            <li><p>Classic Comfort</p></li>
-                          </ul>
-                        </div>
-                      </li>
-                      <li className="icon icon-arrow-left">
-                        <p>Cameras</p>
-                        <div className="mp-level">
-                          <h2>Cameras</h2>
-                          <a className="mp-back" href="#">back</a>
-                          <ul>
-                            <li><p>Smart Shot</p></li>
-                            <li><p>Power Shooter</p></li>
-                            <li><p>Easy Photo Maker</p></li>
-                            <li><p>Super Pixel</p></li>
-                          </ul>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-                <li className="icon icon-arrow-left">
-                  <p>Magazines</p>
-                  <div className="mp-level mp-level-open">
-                    <h2>Magazines</h2>
-                    <a className="mp-back" href="#">back</a>
-                    <ul>
-                      <li><p>National Geographic</p></li>
-                      <li><p>Scientific American</p></li>
-                      <li><p>The Spectator</p></li>
-                      <li><p>The Rambler</p></li>
-                      <li><p>Physics World</p></li>
-                      <li><p>The New Scientist</p></li>
-                    </ul>
-                  </div>
-                </li>
-                <li className="icon icon-arrow-left">
-                  <p>Store</p>
-                  <div className="mp-level">
-                    <h2 className="icon icon-shop">Store</h2>
-                    <a className="mp-back" href="#">back</a>
-                    <ul>
-                      <li className="icon icon-arrow-left">
-                        <p>Clothes</p>
-                        <div className="mp-level">
-                          <h2>Clothes</h2>
-                          <a className="mp-back" href="#">back</a>
-                          <ul>
-                            <li className="icon icon-arrow-left">
-                              <p>Womens Clothing</p>
-                              <div className="mp-level">
-                                <h2>Womens Clothing</h2>
-                                <a className="mp-back" href="#">back</a>
-                                <ul>
-                                  <li><p>Tops</p></li>
-                                  <li><p>Dresses</p></li>
-                                  <li><p>Trousers</p></li>
-                                  <li><p>Shoes</p></li>
-                                  <li><p>Sale</p></li>
-                                </ul>
-                              </div>
-                            </li>
-                            <li className="icon icon-arrow-left">
-                              <p>Mens Clothing</p>
-                              <div className="mp-level">
-                                <h2>Mens Clothing</h2>
-                                <a className="mp-back" href="#">back</a>
-                                <ul>
-                                  <li><p>Shirts</p></li>
-                                  <li><p>Trousers</p></li>
-                                  <li><p>Shoes</p></li>
-                                  <li><p>Sale</p></li>
-                                </ul>
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
-                      </li>
-                      <li><p>Jewelry</p></li>
-                      <li><p>Music</p></li>
-                      <li><p>Grocery</p></li>
-                    </ul>
-                  </div>
-                </li>
-                <li><p>Collections</p></li>
-                <li><p>Credits</p></li>
+          <nav className={s.Menu}>
+            <div className={s.Level}>
+              <ul className={s.List}>
+                {itemsMock.map((item, idx) => (
+                  <ListItem item={item} key={idx}/>
+                ))}
               </ul>
-
             </div>
           </nav>
         </div>

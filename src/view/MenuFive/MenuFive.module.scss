@@ -57,7 +57,106 @@
     transition: all 0.25s ease-in-out;
   }
 
-  &__CloseIcon{
+  &__CloseIcon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 999;
     cursor: pointer;
+  }
+}
+
+
+.BackBtn {
+  position: relative;
+  display: block;
+  padding: 1rem;
+  outline: none;
+  text-transform: uppercase;
+  text-align: center;
+  border: 1px solid red;
+  cursor: pointer;
+
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+
+.Menu {
+  margin-top: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 360px;
+  height: calc(100% - 50px);
+  -webkit-transform: translate3d(0%, 0, 0); /*-webkit-transform: translate3d(-100%, 0, 0);*/
+  transform: translate3d(0%, 0, 0); /*transform: translate3d(-100%, 0, 0);*/
+
+
+  .List {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ListItem {
+    display: block;
+    padding: 0.7em 1em 0.7em 1.8em;
+    outline: none;
+    box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
+    font-size: 1.4rem;
+    -webkit-transition: background 0.3s, box-shadow 0.3s;
+    transition: background 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+
+    &:before {
+      position: absolute;
+      left: 10px;
+      z-index: -1;
+      color: rgba(0, 0, 0, 0.2);
+      line-height: 3.5;
+    }
+  }
+
+  .Level {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    -webkit-transform: translate3d(100%, 0, 0); /*-100%*/
+    transform: translate3d(100%, 0, 0); /*-100%*/
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+
+    &::before, &::after{
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+
+    &::after {
+      background: rgba(0,0,0,0.3);
+      -webkit-transition: opacity 0.3s, width 0.1s 0.3s, height 0.1s 0.3s;
+      transition: opacity 0.3s, width 0.1s 0.3s, height 0.1s 0.3s;
+      z-index: -1;
+    }
+
+    &_active {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  & > .Level {
+    box-shadow: none;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
 }
